@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+        
+{% block 'main' %}
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <!--showing all active & non-deleted post on homepage
+                    loop wil repeat below division based on the number of active & non-deleted post
+                    example: if no. of active & non-deleted posts is 5 then 5 divisions will be shown-->
+                    {% for x in data %}
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <a href="post.html">
+                            <h2 class="post-title">{{x.title}}</h2>
+                            <h3 class="post-subtitle">{{x.small_description}}</h3>
+                        </a>
+                        {% if user.is_authenticated %}
+                        <p class="post-meta">
+                            Posted by
+                            <a href="#!">{{data2}}</a> 
+                            on {{x.date_time}}
+                        </p>
+                        {% else %}
+                        <p class="post-meta">
+                            Posted on {{x.date_time}}
+                        </p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    {% endfor %}
+                    <!-- Pager-->
+                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+                </div>
+            </div>
+        </div>
+{% endblock 'main' %}
+       

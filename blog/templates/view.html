@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--comments using django template language-->
+    {% comment %}
+    <!--control statement using django template language-->
+    {% if x > y %}
+        <p>In If Block</p>
+        <p>{{x}}</p>
+    {% else %}
+        <p>In Else Block</p>
+        <p>{{y}}</p>
+    {% endif %}
+
+    <!--Accessing values of nested dictionary-->
+    <p>{{z.b}}</p>
+    {% endcomment %}
+
+    <h3>Data in the list:</h3>
+    <!--For Loop using django template language-->
+    {% for number in x %}
+        <p>{{number}}</p>
+    {% endfor %}
+</body>
+</html>

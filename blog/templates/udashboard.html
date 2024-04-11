@@ -1,0 +1,105 @@
+<!--udashboard.html is extending base.html
+Means, about.html is inheriting base.html which contains
+header.html & footer.html. So, about.html can access header.html & footer.html from base.html file-->
+<!--when extending base.html its mandatory to follow base.html file's structure-->
+{% extends 'base.html' %}
+
+{% block 'main' %}
+<div class="col text-center">
+    <h1>Dashboard</h1>
+</div>
+<div class="col-md-3 mb-3">
+    <a href="{% url 'create_post' %}"><button class="btn btn-info">Create Blog</button></a>
+</div>
+<hr>
+<!--<div> spanning 8 columns on medium sized devices-->
+<div class="col-md-12">
+<table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Small Description</th>
+        <th scope="col">Details</th>
+        <th scope="col">Category</th>
+        <th scope="col">is-Active</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Change Status</th>
+      </tr>
+    </thead>
+    <tbody>
+<!--Only tables row are repeated-->        
+{% for x in data %}
+    <tr>
+      <td scope="row">{{x.title}}</td>
+      <td>{{x.small_description}}</td>
+      <td>{{x.details}}</td>
+      
+      <!--using if-else using django template language-->
+      <!--Category-->
+      {% if x.category == 1 %} 
+      <td>Technical</td>
+      {% elif x.category == 2 %}
+      <td>Food</td>
+      {% else %}
+      <td>Travel</td>
+      {% endif %}
+
+      <!--Status Section-->
+      {% if x.active == 1 %}
+      <td style="background-color: rgb(2, 146, 2); color: white;">Yes</td>
+      {% else %}
+      <td style="background-color: rgb(206, 2, 2); color: white;">No</td>
+      {% endif %}
+
+      <!--if blog is active delete button is disabled-->
+      {% if x.active == 1 %}
+      <!--Edit Button-->
+      <td><button class="btn btn-warning" disabled>Edit</button></td>
+      <!--Delete Button-->
+      <td><button class="btn btn-danger" disabled>Delete</button></td>
+      <!--if blog is inactive edit & delete button are enabled-->
+      {% else %}
+      <!--Edit Button-->
+      <td><a href="edit/{{x.id}}"><button class="btn btn-warning">Edit</button></a></td>
+      <!--Delete Button-->
+      <td><a href="delete/{{x.id}}"><button class="btn btn-danger">Delete</button></a></td>
+      {% endif %}
+      
+      <!--Update-Status Button-->
+      {% if x.active == 1 %}
+      
+      <td><a href="deactivate/{{x.id}}"><button class="btn btn-secondary">Deactivate</button></a></td>
+      
+      {% elif x.active == 0 %}
+      
+      <td><a href="activate/{{x.id}}"><button class="btn btn-primary">Activate</button></a></td>
+      
+      {% endif %}
+    </tr>
+{% endfor %}
+    </tbody>
+</table>
+</div>
+<span>
+    <!--Filter By Category-->
+    <div class="col-md-3 mt-5">
+        <h4>Filter By Category</h4>
+        <hr>
+        <a href="/catfilter/1">Technical</a><br>
+        <a href="/catfilter/2">Food</a><br>
+        <a href="/catfilter/3">Travel</a><br>
+        <a href="{% url 'user_dash' %}">All</a>
+    </div>
+</span>
+
+<!--Filter By Blog Status-->
+<div class="col-md-3 mt-5">
+    <h4>Filter By Active</h4>
+    <hr>
+    <a href="/actfilter/1">Yes</a><br>
+    <a href="/actfilter/0">No</a><br>
+    <a href="{% url 'user_dash' %}">All</a>
+</div>
+
+{% endblock 'main' %}

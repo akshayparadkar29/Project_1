@@ -1,0 +1,95 @@
+1. Install virtual environment library globally -> pip install virtualenv
+
+-> We need virtual environment library to create seperate working spaces for each django project
+-------------------------------------------------------------------------------------------------------------------------------
+
+2. Create virtual environment->  virtualenv env 
+
+->  We need virtual environment for version management, means if there are 2 projects running on different python &/ django versions
+    so both will have different isolated working space. 
+->  Different django projects will have different dependencies, so in order to prevent the dependencies to clash we need seperate
+    working space which virtual environment
+-------------------------------------------------------------------------------------------------------------------------------
+
+3. Activate virtual environment -> env\Scripts\activate -> (env) E:\Lectures\Django\Django_Projects\Project_1\blog>
+
+----------------------------------------------------------------------------------------------------------------------------
+
+4. Install django library -> pip install django library
+
+-> Above command will install Django Command Line Interface(CLI), after which django commands will be accessible
+--------------------------------------------------------------------------------------------------------------------------------
+
+5. Create django project -> django-admin startproject blog
+
+-> Above django command is used to create a django project folder with below files :
+    
+    1. __pycache__ folder -> contains cache files of imported modules
+    
+    2. __init__.py -> states that current directory is a python package
+    
+    3. asgi.py -> Asynchronous Server Gateway Interface, is a spiritual successor to WSGI, 
+                intended to provide a standard interface between async-capable Python web servers, frameworks, and applications 
+    
+    4. settings.py -> contains settings regarding django project.
+                        for example -> registering django app in installed_apps list,
+                                       registering user created templates folder, etc
+
+    5. urls.py -> contains django project urls mapping
+
+    6. wsgi.py -> Web Server Gateway Interface 
+----------------------------------------------------------------------------------------------------------------------------------
+
+6. Create django application inside project folder -> py manage.py startapp blogapp
+
+-> Above command creates a django application with folders with below files :
+
+    1. __pycache__ folder -> contains cache files of imported modules
+
+    2. migrations folder -> contains database migration files
+
+    3. __init__.py -> states that current directory is a python package
+
+    4. admin.py -> used to display your models in the Django admin panel. You can also customize your admin panel
+
+    5. apps.py -> contains configuration related to our application
+
+    6. models.py -> contains model classes which is the object representation of database table
+
+    7. tests.py -> contains test methods
+
+    8. urls.py -> needs to be created by the user which is used to create url mapping specific to the application
+
+    9. views.py -> contains python function with application logic. Also handles the request & sends back the response
+-------------------------------------------------------------------------------------------------------------------------
+
+7. After above steps we can try running the django development server -> py manage.py runserver
+
+-> After running development server django will create a default database file -> db.sqlite3 
+--------------------------------------------------------------------------------------------------------------------------
+
+8. You need to create a base/master template containing header & footer.
+    For all websites header & footer is same, so instead of repeating the header, body, footer for every web pages
+    we can create a base template. Then on every web pages we can inherit the base template using -> {% extends 'base.html' %}
+    base.html file contains the following structure:
+
+    {% include 'header.html' %}
+
+    {% block 'main' %}
+        web page content goes here
+    {% endblock 'main' %}
+
+    {% include 'footer.html' %}
+
+    On every web page you will have to use -> {% block 'main' %} your content {% endblock 'main' %} to display your web page contents
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+9. what is the use template inheritance ?
+
+-> template inheritance is used to create dynamic data on web page
+for example -> when user log in to his account, user should see the logout button
+                when the user log out from his account, user should see the login button
+----------------------------------------------------------------------------------------------------
+
+10. Create a static folder inside projects root directory same as template folder, which
+    holds static files like css, js, media(images,videos)

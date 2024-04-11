@@ -1,0 +1,30 @@
+<!--we are defining a structure in base.html
+for web pages which we have to follow  -->
+
+<!--Web page is divided into 3 part
+1. Header -> Mostly same for all web pages
+2. Content Area -> different for all web pages
+3. Footer -> Mostly same for all web pages
+-->
+
+<!--
+Template Inheritance is used to create dynamic content
+for example:-
+1. when user log in to his account -> show logout button
+2. when user log out from his account -> show log in button
+-->
+
+<!--inheriting header.html-->
+{% include 'header.html' %}
+
+
+<!--main content block
+use this main block in all web pages
+to display content of each web pages-->
+{% block 'main' %}
+    <!--content of <body> tag goes here-->
+{% endblock 'main' %}
+
+
+<!--inheriting footer.html-->
+{% include 'footer.html' %}

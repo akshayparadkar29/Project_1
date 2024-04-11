@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block 'main' %}
+
+<!-- Main Content-->
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <h1>Create Blog</h1>
+                <div class="my-5">
+                    <!-- * * * * * * * * * * * * * * *-->
+                    <!-- * * SB Forms Contact Form * *-->
+                    <!-- * * * * * * * * * * * * * * *-->
+                    <!-- This form is pre-integrated with SB Forms.-->
+                    <!-- To make this form functional, sign up at-->
+                    <!-- https://startbootstrap.com/solution/contact-forms-->
+                    <!-- to get an API token!-->
+                    <form id="contactForm" method="POST" action="{% url 'create_post' %}" data-sb-form-api-token="API_TOKEN">
+                        <!--CSRF -> Cross-Site-Request-Forgery -> random Alpha-numeric value-->
+                        <!--this token is stored in session on server-->
+                        <!--attacker can seek entry into your application using url OR form-->
+                        <!--this token is needed to prevent attacks-->
+                        {% csrf_token %}
+                        <!--Post Title Section-->
+                        <div class="form-floating">
+                            <input class="form-control" id="name" type="text" name="ptitle" placeholder="Post Title" data-sb-validations="required" />
+                            <label for="name">Post Title</label>
+                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                        </div>
+                        <!--Small Description-->
+                        <div class="form-floating">
+                            <input class="form-control" id="email" type="text" name="sdesc" placeholder="Small Description" data-sb-validations="required,email" />
+                            <label for="email">Small Description</label>
+                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                        </div>
+                        <!--Post Detail Description Section-->
+                        <div class="form-floating">
+                            <textarea class="form-control" id="message" name="det_desc" placeholder="Post Detail Description" style="height: 12rem" data-sb-validations="required"></textarea>
+                            <label for="message">Post Detail Description</label>
+                            <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                        </div>
+                        <!--Category Section-->
+                        <div class="my-3">
+                            <select class="form-select" name="cat" aria-label="Default select example">
+                                <option selected>Select Category</option>
+                                <option value="1">Technical</option>
+                                <option value="2">Food</option>
+                                <option value="3">Travel</option>
+                            </select>
+                        </div>
+                        <!--Radio Buttons Section-->
+                        <!--Active Radio Button-->
+                        <div class="form-check">
+                            <!--value=1, means post is active-->
+                            <input class="form-check-input" type="radio" name="pactive" value="1" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Active
+                            </label>
+                        </div>
+                        <!--Inactive Radio Button-->
+                        <div class="form-check">
+                            <!--value=0, means post is inactive-->
+                            <input class="form-check-input" type="radio" name="pactive" value="0" id="flexRadioDefault2">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Inactive
+                            </label>
+                        </div>
+                        <br />
+                        <!-- Submit success message-->
+                        <!---->
+                        <!-- This is what your users will see when the form-->
+                        <!-- has successfully submitted-->
+                        <div class="d-none" id="submitSuccessMessage">
+                            <div class="text-center mb-3">
+                                <div class="fw-bolder">Form submission successful!</div>
+                                To activate this form, sign up at
+                                <br />
+                                <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                            </div>
+                        </div>
+                        <!-- Submit error message-->
+                        <!---->
+                        <!-- This is what your users will see when there is-->
+                        <!-- an error submitting the form-->
+                        <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                        <!-- Submit Button-->
+                        <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">SAVE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock 'main' %}
