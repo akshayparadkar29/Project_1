@@ -3,6 +3,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 # from blogapp -> import models.py -> import Post class
 from blogapp.models import Post
+# Q class is used to specify multiple conditions for sql statements
 from django.db.models import Q
 # from blogapp -> import forms.py -> import StudentForm class
 from blogapp.forms import StudentForm

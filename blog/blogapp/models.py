@@ -2,7 +2,6 @@
 from django.db import models
 from datetime import datetime
 
-# Create your models here.
 # `Model` is a class
 # Post class is inheriting Model class
 # Post class will become a table in database
